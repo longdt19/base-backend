@@ -25,13 +25,13 @@ class Default(Base):
 
     CAS_KEY = 'cas key'
 
-    MONGODB_HOST = 'mongodb://127.0.0.1:27017/cs-auth'
+    MONGODB_HOST = 'mongodb://127.0.0.1:27017/my-db'
 
     DOMAIN = 'http://127.0.0.1:5000'
 
     FRONT_END_DOMAIN = 'http://127.0.0.1:8080'
 
-    SOCKET_MSG_QUEUE = 'redis://127.0.0.1:6379/0'
+    # SOCKET_MSG_QUEUE = 'redis://127.0.0.1:6379/0'
 
 
 def get_config():
