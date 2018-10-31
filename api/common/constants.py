@@ -20,3 +20,21 @@ PAGINATION = {
     'page': 1,
     'per_page': 50
 }
+
+GENDERS = [
+    {
+        'code': 1,
+        'title': 'Nam',
+        'name': 'male'
+    },
+    {
+        'code': 2,
+        'title': 'Nữ',
+        'name': 'female'
+    },
+    {
+        'code': 3,
+        'title': 'Chưa xác định',
+        'name': 'unknown'
+    }
+]
