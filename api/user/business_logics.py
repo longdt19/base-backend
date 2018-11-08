@@ -1,24 +1,23 @@
-from flask import jsonify
+import uuid
+from flask import jsonify, g
 
-from .models import User
+from .models import Account
 from .errors import *
 
 
-class UserBL(object):
+class AccountBL(object):
     def get(self):
-        print (User.objects())
+        print('vao day')
+        account = g.session.query(Account).all()
+        print('hihi', account)
         return 'hihi'
     
     def post(self, username, password, email=None):
-        if username == 'Longdt1':
-            raise NameCannotBeCreated
-        
-        user = User.objects().filter(username=username)
-        if user:
-            raise NameAlreadyExists
-            
-        new_user = User(username=username, password=password).save()
-        
-        return jsonify(new_user)
+        id = uuid.uuid4()
+        ed_user = Account(id=id, username=username, password=password, email=email)
+        g.session.add(ed_user)
+        g.session.commit()
+        print('123', g.session.query(Account).all())
+        return '123'
 
-user_bl = UserBL()
+user_bl = AccountBL()

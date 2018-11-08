@@ -9,6 +9,9 @@ from api.extensions import api, db, cors
 from .endpoints import ENDPOINTS
 from .flask_session import ItsdangerousSessionInterface
 
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
 __all__ = ['create_app']
 
 def create_app(app_name=None):
@@ -72,11 +75,19 @@ def configure_hook(app):
         #     if not g.user:
         #         return abort(401)
         print ('before_request')
+        engine = create_engine('postgresql://alembic:alembic@localhost/basebackend')
+
+        Session = sessionmaker()
+        Session.configure(bind=engine)
+        session = Session()
+        g.session = session
     
-    # @app.after_request
-    # def after_request():
-    #     """ ham nay chay sau khi xu ly request"""
-    #     print ('after_request')
+    @app.after_request
+    def after_request(response):
+        """ ham nay chay sau khi xu ly request"""
+        print ('after_request')
+        g.session.close()
+        return response
 
 def configure_error_handlers(app):
     @app.errorhandler(Exception)
